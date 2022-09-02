@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.ProgrammingLanguages.CommandValidators
+namespace Application.Features.ProgrammingLanguages.Commands.Create
 {
-    public class CreateProgrammingLanguageCommandValidator:AbstractValidator<CreateProgrammingLanguage>
+    public class CreateProgrammingLanguageCommandValidator : AbstractValidator<CreateProgrammingLanguageCommand>
     {
         public CreateProgrammingLanguageCommandValidator()
         {
-            RuleFor(p=>p.Name).NotEmpty();
+            RuleFor(p => p.Name).NotEmpty();
         }
     }
 }
