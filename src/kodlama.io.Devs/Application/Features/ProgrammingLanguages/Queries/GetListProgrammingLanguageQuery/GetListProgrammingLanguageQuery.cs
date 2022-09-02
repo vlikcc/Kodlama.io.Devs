@@ -33,7 +33,7 @@ namespace Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLa
             }
             public async Task<ProgrammingLanguageListModel> Handle(GetListProgrammingLanguageQuery request, CancellationToken cancellationToken)
             {
-                IPaginate<ProgrammingLanguage> languages = await _repository.GetListAsync(index:request.pageRequest.Page,size:request.pageRequest.PageSize);
+                IPaginate<ProgrammingLanguage> languages = await _repository.GetListAsync(index:request.PageRequest.Page,size:request.PageRequest.PageSize);
                 ProgrammingLanguageListModel mappadprogrammingLanguageListModel = _mapper.Map<ProgrammingLanguageListModel>(languages);
                 return mappadprogrammingLanguageListModel;
             }
