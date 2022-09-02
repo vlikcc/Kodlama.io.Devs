@@ -11,12 +11,12 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.ProgrammingLanguages.Commands
+namespace Application.Features.ProgrammingLanguages.Commands.Create
 {
-    public partial class CreateProgrammingLanguage:IRequest<CreatedProgrammingLanguageDto>
+    public partial class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLanguageDto>
     {
         public string Name { get; set; }
-        public class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguage, CreatedProgrammingLanguageDto>
+        public class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguageCommand, CreatedProgrammingLanguageDto>
         {
             private readonly IProgrammingLanguageRepository _repository;
             private readonly IMapper _mapper;
@@ -27,7 +27,7 @@ namespace Application.Features.ProgrammingLanguages.Commands
                 _mapper = mapper;
                 _businessRules = businessRules;
             }
-            public async Task<CreatedProgrammingLanguageDto> Handle(CreateProgrammingLanguage request, CancellationToken cancellationToken)
+            public async Task<CreatedProgrammingLanguageDto> Handle(CreateProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
                 await _businessRules.ProgrammingLanguageNameCannotBeDublicatedWhenInserted(request.Name);
                 ProgrammingLanguage mappedLanguage = _mapper.Map<ProgrammingLanguage>(request.Name);
