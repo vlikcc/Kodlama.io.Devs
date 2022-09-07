@@ -30,7 +30,7 @@ namespace Application.Features.ProgrammingLanguages.Commands.Create
             public async Task<CreatedProgrammingLanguageDto> Handle(CreateProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
                 await _businessRules.ProgrammingLanguageNameCannotBeDublicatedWhenInserted(request.Name);
-                ProgrammingLanguage mappedLanguage = _mapper.Map<ProgrammingLanguage>(request.Name);
+                ProgrammingLanguage mappedLanguage = _mapper.Map<ProgrammingLanguage>(request);
                 ProgrammingLanguage createdLanguage = await _repository.AddAsync(mappedLanguage);
                 CreatedProgrammingLanguageDto createdProgrammingLanguageDto = _mapper.Map<CreatedProgrammingLanguageDto>(createdLanguage);
                 return createdProgrammingLanguageDto;
