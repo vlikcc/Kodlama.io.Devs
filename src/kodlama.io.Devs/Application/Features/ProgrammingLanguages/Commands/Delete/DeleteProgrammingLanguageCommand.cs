@@ -14,6 +14,7 @@ namespace Application.Features.ProgrammingLanguages.Commands.Delete
 {
     public  partial class DeleteProgrammingLanguageCommand:IRequest<DeletedProgrammingLanguageDto>
     {
+        public int Id { get; set; }
         public class DeleteProgrammingLangualgeCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, DeletedProgrammingLanguageDto>
         {
             private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
@@ -29,9 +30,10 @@ namespace Application.Features.ProgrammingLanguages.Commands.Delete
             public async Task<DeletedProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
                 
-                ProgrammingLanguage mappadLanguage = _mapper.Map<ProgrammingLanguage>(request);                
-                ProgrammingLanguage deletedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(mappadLanguage);
-                _businessRules.ProgrammingLanguageShouldExistWhenRequested(mappadLanguage);
+                ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id);
+                await _businessRules.ProgrammingLanguageShouldExistWhenRequested(programmingLanguage);
+                ProgrammingLanguage mappadLanguage = _mapper.Map<ProgrammingLanguage>(programmingLanguage);                
+                ProgrammingLanguage deletedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(mappadLanguage);               
                 DeletedProgrammingLanguageDto deletedProgrammingLanguageDto = _mapper.Map<DeletedProgrammingLanguageDto>(deletedProgrammingLanguage);
                 return deletedProgrammingLanguageDto;
             }

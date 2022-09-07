@@ -14,6 +14,8 @@ namespace Application.Features.ProgrammingLanguages.Commands.Update
 {
     public partial class UpdateProgrammingLanguageCommand:IRequest<UpdatedProgrammingLanguageDto>
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
         public class UpdateProgrammingLanguageCommandHandler : IRequestHandler<UpdateProgrammingLanguageCommand, UpdatedProgrammingLanguageDto>
         {
             private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
@@ -27,11 +29,18 @@ namespace Application.Features.ProgrammingLanguages.Commands.Update
             }
             public async Task<UpdatedProgrammingLanguageDto> Handle(UpdateProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
-                ProgrammingLanguage mappadLanguage = _mapper.Map<ProgrammingLanguage>(request);
-                ProgrammingLanguage updatedProgrammingLanguage = await _programmingLanguageRepository.UpdateAsync(mappadLanguage);
-                _businessRules.ProgrammingLanguageShouldExistWhenRequested(mappadLanguage);
-                UpdatedProgrammingLanguageDto updatedProgrammingLanguageDto = _mapper.Map<UpdatedProgrammingLanguageDto>(updatedProgrammingLanguage);
+                ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id);
+                await _businessRules.ProgrammingLanguageShouldExistWhenRequested(programmingLanguage);
+                await _businessRules.ProgrammingLanguageNameCannotBeDublicatedWhenInserted(request.Name);
+                programmingLanguage.Name=request.Name;
+
+                ProgrammingLanguage updatedProgrammingLanguage = await _programmingLanguageRepository.UpdateAsync(programmingLanguage);
+                UpdatedProgrammingLanguageDto updatedProgrammingLanguageDto = _mapper.Map<UpdatedProgrammingLanguageDto>(updatedProgrammingLanguage);   
                 return updatedProgrammingLanguageDto;
+
+
+
+                
 
             }
         }
