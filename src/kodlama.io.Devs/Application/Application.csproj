@@ -20,4 +20,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Technologies\Commands\Delete\" />
+    <Folder Include="Features\Technologies\Commands\Update\" />
+    <Folder Include="Features\Technologies\Models\" />
+  </ItemGroup>
+
 </Project>
