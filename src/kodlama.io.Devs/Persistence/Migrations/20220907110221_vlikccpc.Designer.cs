@@ -11,8 +11,8 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20220904150456_Init")]
-    partial class Init
+    [Migration("20220907110221_vlikccpc")]
+    partial class vlikccpc
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
