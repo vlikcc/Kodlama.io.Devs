@@ -35,11 +35,24 @@ namespace Persistence.Contexts
                 a.ToTable("Languages").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
                 a.Property(p => p.Name).HasColumnName("Name");
+                a.HasMany(p => p.Technologies);
+
+            });
+
+            modelBuilder.Entity<Technology>(t=>
+            {
+                t.ToTable("Technologies").HasKey(k => k.Id);
+                t.Property(p => p.Id).HasColumnName("Id");
+                t.Property(p => p.ProgrammingLanguageId).HasColumnName("ProgrammingLanguageId");
+                t.Property(p => p.Name).HasColumnName("Name");
+                t.HasOne(p => p.ProgrammingLanguage);
+
+
             });
 
 
 
-           // ProgrammingLanguage[] languageEntitySeeds = { new(1, "C#"), new(2, "Java") };
+            ProgrammingLanguage[] languageEntitySeeds = { new(1, "C#"), new(2, "Java") };
             modelBuilder.Entity<ProgrammingLanguage>();
 
 

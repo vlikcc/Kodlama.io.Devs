@@ -1,6 +1,7 @@
 ﻿using Application.Features.Technologies.Dtos;
 using Application.Services.Repositories;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,13 @@ namespace Application.Features.Technologies.Commands.Create
                 _mapper = mapper;
             }
 
-            public Task<CreatedTechnologyDto> Handle(CreateTechnologyCommand request, CancellationToken cancellationToken)
+            public async Task<CreatedTechnologyDto> Handle(CreateTechnologyCommand request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                Technology mappadtechnology = _mapper.Map<Technology>(request);
+                Technology createdTechnology = await _technologyRepository.AddAsync(mappadtechnology);
+                CreatedTechnologyDto createdTechnologyDto = _mapper.Map<CreatedTechnologyDto>(createdTechnology);
+                return createdTechnologyDto;
+
             }
         }
     }
