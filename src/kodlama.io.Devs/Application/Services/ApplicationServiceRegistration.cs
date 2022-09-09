@@ -7,6 +7,7 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Application.Features.Technologies.Rules;
 
 namespace Application.Services
 {
@@ -19,6 +20,7 @@ namespace Application.Services
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<ProgrammingLanguageBusinessRules>();
+            services.AddScoped<TechnologyBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));

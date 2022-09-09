@@ -13,6 +13,7 @@ namespace Persistence.Contexts
     {
         protected IConfiguration Configuration { get; set; }
         public DbSet<ProgrammingLanguage> Languages { get; set; }
+        public DbSet<Technology> Technologies { get; set; }
 
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
@@ -52,7 +53,7 @@ namespace Persistence.Contexts
 
 
 
-            ProgrammingLanguage[] languageEntitySeeds = { new(1, "C#"), new(2, "Java") };
+            //ProgrammingLanguage[] languageEntitySeeds = { new(1, "C#"), new(2, "Java") };
             modelBuilder.Entity<ProgrammingLanguage>();
 
 

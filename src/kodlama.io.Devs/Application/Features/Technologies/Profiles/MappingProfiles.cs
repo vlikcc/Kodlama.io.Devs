@@ -29,7 +29,7 @@ namespace Application.Features.Technologies.Profiles
             CreateMap<Technology,TechnologyListDto>().
                 ForMember(t=>t.ProgrammingLanguageName, opt=>opt.MapFrom(t=>t.ProgrammingLanguage.Name)).
                 ReverseMap();
-            CreateMap<IPaginate<Technology>,TechnologyListModel>().ReverseMap();
+            CreateMap<IPaginate<Technology>,TechnologyListModel>().ReverseMap();           
             CreateMap<Technology,TechnologyGetByIdDto>().ReverseMap();
 
 
