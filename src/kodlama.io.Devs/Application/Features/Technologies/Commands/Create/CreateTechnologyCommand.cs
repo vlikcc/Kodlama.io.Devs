@@ -14,6 +14,7 @@ namespace Application.Features.Technologies.Commands.Create
     public  partial class CreateTechnologyCommand:IRequest<CreatedTechnologyDto>
     {
         public string Name { get; set; }
+        public int ProgrammingLanguageId { get; set; }
 
         public class CreateTechnlogyCommandHandler : IRequestHandler<CreateTechnologyCommand, CreatedTechnologyDto>
         {

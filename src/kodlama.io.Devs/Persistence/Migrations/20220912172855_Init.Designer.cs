@@ -11,8 +11,8 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20220909094254_IzmirMEM")]
-    partial class IzmirMEM
+    [Migration("20220912172855_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
