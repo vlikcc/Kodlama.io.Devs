@@ -21,12 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\SocialMediaProfiles\Commands\Delete\" />
-    <Folder Include="Features\SocialMediaProfiles\Commands\Update\" />
-    <Folder Include="Features\SocialMediaProfiles\Models\" />
     <Folder Include="Features\SocialMediaProfiles\Queries\" />
     <Folder Include="Features\SocialMediaProfiles\Rules\" />
-    <Folder Include="Features\SocialMediaProfiles\Profiles\" />
     <Folder Include="Features\Users\" />
   </ItemGroup>
 
