@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services.Repositories
 {
-    public interface IGithubProfileRepository:IAsyncRepository<GithubProfile>,IRepository<GithubProfile>
+    public interface ISocialMediaProfileRepository:IAsyncRepository<SocialMediaProfile>,IRepository<SocialMediaProfile>
     {
     }
 }

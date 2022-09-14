@@ -9,20 +9,21 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class GithubProfile:Entity
+    public class SocialMediaProfile:Entity
     {
         public int UserId { get; set; }
-        public string GithubUserName { get; set; }
+        public string SocialMediaUserName { get; set; }
+        public string ProfileUrl { get; set; }
         public virtual User? User { get; set; }
 
-        public GithubProfile(int id,int userId, string githubUserName)
+        public SocialMediaProfile(int id,int userId, string socialMediaUserName)
         {
             Id = id;
             UserId = userId;
-            GithubUserName = githubUserName;
+            SocialMediaUserName = socialMediaUserName;
         }
 
-        public GithubProfile()
+        public SocialMediaProfile()
         {
 
         }

@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.GithubProfiles.Dtos
+namespace Application.Features.SocialMediaProfiles.Dtos
 {
-    public class CreatedGithubProfileDto
+    public class CreatedSocialMediaProfileDto
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public string GithubUserName { get; set; }
+        public string SocialMediaUserName { get; set; }
+        public string ProfileUrl { get; set; }
     }
 }

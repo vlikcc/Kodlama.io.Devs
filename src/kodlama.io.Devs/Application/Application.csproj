@@ -21,12 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\GithubProfiles\Commands\Delete\" />
-    <Folder Include="Features\GithubProfiles\Commands\Update\" />
-    <Folder Include="Features\GithubProfiles\Models\" />
-    <Folder Include="Features\GithubProfiles\Queries\" />
-    <Folder Include="Features\GithubProfiles\Rules\" />
-    <Folder Include="Features\GithubProfiles\Profiles\" />
+    <Folder Include="Features\SocialMediaProfiles\Commands\Delete\" />
+    <Folder Include="Features\SocialMediaProfiles\Commands\Update\" />
+    <Folder Include="Features\SocialMediaProfiles\Models\" />
+    <Folder Include="Features\SocialMediaProfiles\Queries\" />
+    <Folder Include="Features\SocialMediaProfiles\Rules\" />
+    <Folder Include="Features\SocialMediaProfiles\Profiles\" />
     <Folder Include="Features\Users\" />
   </ItemGroup>
 
