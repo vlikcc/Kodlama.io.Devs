@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\SocialMediaProfiles\Queries\" />
     <Folder Include="Features\SocialMediaProfiles\Rules\" />
     <Folder Include="Features\Users\" />
   </ItemGroup>

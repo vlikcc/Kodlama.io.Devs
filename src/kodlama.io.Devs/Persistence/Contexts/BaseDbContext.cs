@@ -1,7 +1,9 @@
-﻿using Domain.Entities;
+﻿using Core.Security.Entities;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,8 @@ namespace Persistence.Contexts
         protected IConfiguration Configuration { get; set; }
         public DbSet<ProgrammingLanguage> Languages { get; set; }
         public DbSet<Technology> Technologies { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
@@ -49,6 +53,40 @@ namespace Persistence.Contexts
                 t.HasOne(p => p.ProgrammingLanguage);
 
 
+            });
+
+            modelBuilder.Entity<User>(a =>
+            {
+                a.ToTable("Users").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(c => c.FirstName).HasColumnName("FirstName");
+                a.Property(c => c.LastName).HasColumnName("LastName");
+                a.Property(c => c.Email).HasColumnName("Email");
+                a.Property(c => c.PasswordSalt).HasColumnName("PasswordSalt");
+                a.Property(c => c.PasswordHash).HasColumnName("PasswordHash");
+                a.Property(c => c.Status).HasColumnName("Status");
+                a.Property(c => c.AuthenticatorType).HasColumnName("AuthenticatorType");
+
+                a.HasMany(c => c.UserOperationClaims);
+                a.HasMany(c => c.RefreshTokens);
+            });
+
+            modelBuilder.Entity<OperationClaim>(a =>
+            {
+                a.ToTable("OperationClaims").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(c => c.Name).HasColumnName("Name");
+            });
+
+            modelBuilder.Entity<UserOperationClaim>(a =>
+            {
+                a.ToTable("UserOperationClaims").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(c => c.UserId).HasColumnName("UserId");
+                a.Property(c => c.OperationClaimId).HasColumnName("OperationClaimId");
+
+                a.HasOne(c => c.OperationClaim);
+                a.HasOne(c => c.User);
             });
 
 
