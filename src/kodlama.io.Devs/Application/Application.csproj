@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Features\SocialMediaProfiles\Rules\" />
-    <Folder Include="Features\Users\" />
   </ItemGroup>
 
 </Project>
