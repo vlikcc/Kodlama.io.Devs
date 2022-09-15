@@ -10,6 +10,7 @@ namespace Application.Services.Repositories
 {
     public interface IUserRepository:IAsyncRepository<User>,IRepository<User>
     {
+        List<OperationClaim> GetClaims(User user);
 
     }
 }

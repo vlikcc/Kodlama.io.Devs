@@ -1,4 +1,5 @@
 ﻿using Application.Features.Users.Dtos;
+using Application.Features.Users.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Security.Dtos;
@@ -25,11 +26,13 @@ namespace Application.Features.Users.Commands.Create
         {
             private readonly IUserRepository _userRepository;
             private readonly IMapper _mapper;
+            private readonly UserBusinessRules _businessRules;
 
-            public CreateUserCommandHandler(IUserRepository userRepository, IMapper mapper)
+            public CreateUserCommandHandler(IUserRepository userRepository, IMapper mapper,UserBusinessRules userBusinessRules )
             {
                 _userRepository = userRepository;
                 _mapper = mapper;
+                _businessRules = userBusinessRules;
             }
 
             public async Task<UserForRegisterDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -41,6 +44,7 @@ namespace Application.Features.Users.Commands.Create
                 createdUser.PasswordSalt=passwordSalt;
                 createdUser.PasswordHash=passwordHash;
                 createdUser.AuthenticatorType = AuthenticatorType.Email;
+                await _businessRules.EmailCannotBeDublicated(createdUser.Email);                
                 await _userRepository.AddAsync(createdUser); 
                 UserForRegisterDto createdUserDto = _mapper.Map<UserForRegisterDto>(createdUser);
                 return createdUserDto;

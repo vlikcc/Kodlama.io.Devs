@@ -1,4 +1,5 @@
 ﻿using Application.Features.Users.Dtos;
+using Application.Features.Users.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Security.Entities;
@@ -24,24 +25,28 @@ namespace Application.Features.Users.Commands.Update
         {
             private readonly IUserRepository _userRepository;
             private readonly IMapper _mapper;
+            private readonly UserBusinessRules _businessRules;
 
-            public UpdateUserCommandHandler(IUserRepository userRepository, IMapper mapper)
+            public UpdateUserCommandHandler(IUserRepository userRepository, IMapper mapper, UserBusinessRules businessRules)
             {
                 _userRepository = userRepository;
                 _mapper = mapper;
+                _businessRules = businessRules;
             }
 
             public async Task<UpdatedUserDto> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
             {
                 byte[] passwordHash, passwordSalt;
                 User user = await _userRepository.GetAsync(u => u.Id == request.UserId);
+                _businessRules.CheckUserExist(user);
+                _businessRules.EmailCannotBeDublicated(request.Email);
                 user.Email = request.Email;
                 user.FirstName=request .FirstName;
                 user.LastName=request .LastName;
                 HashingHelper.CreatePasswordHash(request.Password, out passwordHash, out passwordSalt);
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
-
+                
                 User updatedUser = await _userRepository.UpdateAsync(user);
                 UpdatedUserDto updatedUserDto = _mapper.Map<UpdatedUserDto>(updatedUser);
                 return updatedUserDto;

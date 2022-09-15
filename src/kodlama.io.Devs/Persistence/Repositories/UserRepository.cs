@@ -16,7 +16,7 @@ namespace Persistence.Repositories
         {
         }
 
-        public IList<OperationClaim> GetClaims(User user)
+        public List<OperationClaim> GetClaims(User user)
         {
             var result = from OperationClaim in Context.OperationClaims
                          join UserOperationClaim in Context.UserOperationClaims

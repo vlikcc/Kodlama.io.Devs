@@ -13,7 +13,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TechnologyController : BaseController
+    public class TechnologiesController : BaseController
     {
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateTechnologyCommand createTechnologyCommand)

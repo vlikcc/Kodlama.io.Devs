@@ -1,5 +1,6 @@
 ﻿using Application.Features.Users.Commands.Create;
 using Application.Features.Users.Commands.Delete;
+using Application.Features.Users.Commands.Login;
 using Application.Features.Users.Commands.Update;
 using Application.Features.Users.Dtos;
 using AutoMapper;
@@ -20,12 +21,15 @@ namespace Application.Features.Users.Profiles
             CreateMap<User,UserForRegisterDto>().ReverseMap();
             CreateMap<User,CreateUserCommand>().ReverseMap();
 
+            CreateMap<User, LoginUserCommand>().ReverseMap();
+            CreateMap<User, UserForLoginDto>().ReverseMap();
+
             CreateMap<User,UpdatedUserDto>().ReverseMap();
             CreateMap<User, UpdateUserCommand>().ReverseMap();
 
             CreateMap<User, DeleteUserCommand>().ReverseMap();
 
-            CreateMap<User, UserForLoginDto>().ReverseMap(); 
+             
             
         }
     }
